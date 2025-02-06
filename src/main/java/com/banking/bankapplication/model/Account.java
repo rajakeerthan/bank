@@ -19,9 +19,14 @@ public class Account {
     @Column(name="id")
     private Long id;
 
+
     @Column(name="accname")
     private String accName;
 
     @Column(name="balance")
     private double balance;
+
+    @Column(name="accNum")
+    private Long accNum;
+
 }

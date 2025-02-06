@@ -1,7 +1,9 @@
 package com.banking.bankapplication.controller;
 
 import com.banking.bankapplication.dto.AccountDto;
+import com.banking.bankapplication.dto.TransactionDto;
 import com.banking.bankapplication.repository.AccountRepo;
+import com.banking.bankapplication.repository.TransRepo;
 import com.banking.bankapplication.service.AccountService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,16 @@ public class AccountController {
 
     @Autowired
     private AccountRepo accountRepo;
+
+    @Autowired
+    private TransRepo trnasRepo;
+
+    @GetMapping("transactions/{accNum}")
+    public ResponseEntity<List<TransactionDto>> getTransactions(@PathVariable Long accNum){
+        List<TransactionDto> transactionDtos=accountService.getTransactions(accNum);
+        return ResponseEntity.ok(transactionDtos);
+    }
+
 
 
     @PostMapping("/add")
@@ -66,8 +78,5 @@ public class AccountController {
         accountService.deleteAccount(id);
         return ResponseEntity.ok("successfully deleted");
     }
-
-
-
 }
 
